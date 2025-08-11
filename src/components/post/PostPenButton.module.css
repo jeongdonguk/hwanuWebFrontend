@@ -1,0 +1,15 @@
+/* 클릭 글쓰기 버튼 */
+.write_button {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  width: 57px;
+  height: 57px;
+  background: #F86FBF;
+  border-radius: 50%;
+  display: flex; /* 자식 요소를 가운데 정렬하기 위해 flex 사용 */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* 링크 밑줄 제거 */
+  z-index: 1000;
+}

@@ -1,0 +1,100 @@
+.board_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 900px;
+    min-height: 500px;
+    /* background-color: black; */
+}
+
+.board_cnt_container {
+    display: flex;
+    /* margin-left: 55px; */
+    /* justify-content: center; */
+    align-items: center;      /* 수직 가운데 */
+    width: 797px;
+    height: 34px;
+    /* background-color: aqua; */
+
+    text-align: left;
+    /* font-size: 16px; */
+    font: normal normal 600 14px Noto Sans KR;
+    letter-spacing: 0px;
+    color: #212121;
+
+}
+
+.board_top_line {
+    /* top: 340px; */
+    left: 55px;
+    width: 797px;
+    height: 3px;
+    background: #F86FBF 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+.board_table_container {
+    /* top: 343px; */
+    /* left: 55px; */
+    width: 797px;
+    min-height: 300px;
+    /* background: #F2F2F2 0% 0% no-repeat padding-box; */
+    opacity: 1;
+}
+
+.board_table {
+    border-collapse: collapse; /* 테두리 합치기 */
+    vertical-align: middle;
+    text-align: center;
+    table-layout: fixed;
+    /* top: 343px; */
+    /* left: 55px; */
+    width: 797px;
+    /* font: normal normal 600 14px Noto Sans Myanmar; */
+    /* height: 27px;
+    background: #F2F2F2 0% 0% no-repeat padding-box;
+    opacity: 1;  */
+}
+
+.board_table thead{
+    /* top: 343px; */
+    /* left: 55px; */
+    vertical-align: middle;
+    /* width: 797px; */
+    font-weight: bold;
+    height: 27px;
+    /* font-family: 'Noto Sans KR'; */
+    /* font-style: normal; */
+    font-size: 11px;
+    background: #F2F2F2 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+.board_table tr{
+    /* top: 343px; */
+    /* left: 55px; */
+    vertical-align: middle;
+    /* width: 797px; */
+    /* font-weight: bold; */
+    height: 39.5px;
+    /* font-family: 'Noto Sans KR'; */
+    /* font-style: normal; */
+    font-size: 11px;
+    border-bottom: 0.25px solid #707070;
+    opacity: 1;
+}
+
+
+/* top: 410px;
+left: 56px;
+width: 797px;
+height: 0px;
+border: 0.25px solid #707070;
+opacity: 1; */
+
+.board_table th:nth-child(1) {width: 5%;}
+.board_table th:nth-child(2) {width: 53%;}
+.board_table th:nth-child(3) {width: 12%;}
+.board_table th:nth-child(4) {width: 10%;}
+.board_table th:nth-child(5) {width: 10%;}
+.board_table th:nth-child(6) {width: 10%;}
