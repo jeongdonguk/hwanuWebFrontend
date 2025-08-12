@@ -8,8 +8,8 @@ import PenButton from "../post/PostPenButton"
 
 function Board() {
 
-  const hasJwt = useSelector((s) => Boolean(s.auth.hwanuAccessToken));
-  console.log("hasJwt :",hasJwt);
+  // const hasJwt = useSelector((s) => Boolean(s.auth.hwanuAccessToken));
+  // console.log("hasJwt :",hasJwt);
   
   // const [page, setPage] = useState(0); // 페이지번호
   const [searchParams, setSearchParams] = useSearchParams(); // url입력파라미터 정의
@@ -20,14 +20,14 @@ function Board() {
   }; // 파라미터 변경 함수
 
   const [totalPage, setTotalPage] = useState(1); // 페이지번호
-  console.log('로그인 여부 : ',hasJwt);
+  // console.log('로그인 여부 : ',hasJwt);
   console.log('현재 페이지 :',page);
   console.log(document.cookie);
   return (
     <div>
       <BoardSearch />
-      <BoardList {...{hasJwt, page, setPage, setTotalPage}}></BoardList>
-      <BoardPaging {...{hasJwt, page, setPage, totalPage}} />
+      <BoardList {...{page, setPage, setTotalPage}}></BoardList>
+      <BoardPaging {...{page, setPage, totalPage}} />
       <PenButton></PenButton>
     </div>
 

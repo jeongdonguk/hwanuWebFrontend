@@ -1,38 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { fetchBoardList, fetchPublicBoardList } from "../../api/board";
+import { useEffect, useState } from "react";
+import { fetchBoardList } from "../../api/board";
 import classes from "./BoardList.module.css";
 
-function BoardList({hasJwt, page, setTotalPage}) {
+function BoardList({page, setTotalPage}) {
+
+  const [boards, setBoards] = useState([]);
+  const [boardsCnt, setBoardsCnt] = useState(0);
 
   // 게시글 가져올때 사용할 api 결정
   const fetchBoards = async () => {
-    return hasJwt
-      ? await fetchBoardList(page, 10)
-      : await fetchPublicBoardList();
+    const viewData = await fetchBoardList(page, 10);
+    console.log("fetchBoardList 완료:", viewData);
+    setBoards(viewData.content);
+    setBoardsCnt(viewData.totalElements);
+    setTotalPage(viewData.totalPages);
+    return viewData;
   };
 
   // 페이지 변경시마다 게시글 리스트 새로 가져오기
   const { data, isLoading, error } = useQuery({
-    queryKey : ["boardList", hasJwt, page],
+    queryKey : ["boardList", page],
     queryFn : fetchBoards,
-    keepPreviousData: true // 신규데이터 로딩시 기존데이터 잠시 유지
+    keepPreviousData: true, // 신규데이터 로딩시 기존데이터 잠시 유지q
   });
 
-
-  useEffect(() => {
-    if (data) {
-      setTotalPage(data.totalPages);
-    }
-  }, [data, setTotalPage])
-
-  if (isLoading) return <p>게시글 데이터 가져오는 중</p>
-  if (error) return <p>게시글 가져오기 장애 : {error.message}</p>
-  if (!data) return null;
-
-  const boards = data.content;
-  const boardsCnt = data.totalElements;
-  
 
   return (
     <div className={classes.board_container}>

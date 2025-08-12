@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import classes from "./BoardPaging.module.css";
 
-function BoardPaging({hasJwt, page, setPage, totalPage}) {
+function BoardPaging({page, setPage, totalPage}) {
 
   const maxPageNumbers = 10; // 하단에 표기될 최대 페이지 수
   const startPageNumber = Math.floor(page / maxPageNumbers) * maxPageNumbers; // 맨앞 페이지 번호
@@ -14,14 +14,7 @@ function BoardPaging({hasJwt, page, setPage, totalPage}) {
   )
 
   const pageChangeHandler = (targetPage) => {
-    if (hasJwt) {
-      setPage(targetPage);
-    }
-    else {
-      alert("로그인이 필요한 서비스입니다.");
-      navigate('/login');
-    }
-
+    setPage(targetPage);
   } 
 
   return (
