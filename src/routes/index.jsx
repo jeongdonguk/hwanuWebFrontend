@@ -5,8 +5,8 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Post from "../pages/Post";
 import PostRead from "../pages/PostRead";
-import ReviewInput from "../components/postRead/ReviewInput";
-// import Frame2 from "../pages/test2";
+// import ReviewInput from "../components/postRead/ReviewInput";
+// import PostReadComponent from "../components/postRead/PostReadComponents";
 
 
 const titles = {
@@ -32,7 +32,7 @@ const AppRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/post" element={<Post />} />
         <Route path="/postRead" element={<PostRead />} />
-        <Route path="/postRead2" element={<ReviewInput />} />
+        {/* <Route path="/test" element={<PostReadComponent />} /> */}
       </Routes>
   );
 };

@@ -1,16 +1,14 @@
-// import BottomButton from "../components/postRead/BottomButton"
-// import ReviewInput from "../components/postRead/ReviewInput"
-import Frame from "../components/postRead/Frame"
+import PostReadComponents from "../components/postRead/PostReadComponents";
 import Header from "../components/header/Header";
 
 const PostRead = () => {
   return (
-    <div className="container">
+    <>
+      <div className="container">
         <Header></Header>
-        <Frame></Frame>
-        {/* <ReviewInput></ReviewInput> */}
-        {/* <BottomButton></BottomButton> */}
-    </div>
+        <PostReadComponents></PostReadComponents>
+      </div>
+    </>
   );
 };
 

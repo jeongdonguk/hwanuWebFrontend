@@ -1,76 +1,76 @@
-import React from "react";
-import styles from "./Frame.module.css";
-import ReviewInput from "./ReviewInput.jsx"
+import React, { useEffect, useState } from "react";
+import image from "./img/vertical_bar.svg";
+import line1 from "./img/contentLine.svg";
+import line2 from "./img/contentLine.svg";
+import line3 from "./img/vertical_bar.svg";
+import line42 from "./img/vertical_bar.svg";
+import line4 from "./img/vertical_bar.svg";
+import styles from "./PostReadComponents.module.css";
+import vector1 from "./img/recomment.svg";
+import { useSearchParams } from "react-router-dom";
+import { getPostData } from "../../api/postApi";
 
-const Frame = () => {
+export const PostReadComponents = () => {
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const boardId = Number(searchParams.get("boardId" || 0));
+  const [contentData, setContentData] = useState(null);
+
+    // 게시글 가져오는 함수
+  const fetchPostData = async () => {
+    const response = await getPostData(boardId);
+    setContentData(response);
+    console.log("ContentData 완료:", response);
+  };
+
+    // 마운트 시 1번만 실행
+  useEffect(() => {
+    if (boardId) {
+      fetchPostData();
+    }
+  }, []);
+
+  if (!contentData) { return null}
+
   return (
-    <div className={styles.frame} data-model-id="1:2">
+    // <div className={styles.board_container}></div>
+    <div className={styles.frame}>
       <div className={styles.div}>
-
-        {/* <div className={styles.rectangle} /> */}
-
         <div className={styles["div-2"]}>
           <div className={styles["div-3"]}>
-            <div className={styles["text-wrapper-2"]}>제목을 입력해주세용</div>
-
+            <div className={styles["text-wrapper-2"]}>{contentData.title}</div>
             <div className={styles["div-4"]}>
               <div className={styles.view}>
                 <div className={styles["text-wrapper-3"]}>작성자 |</div>
                 <div className={styles["div-wrapper"]}>
-                  <div className={styles["text-wrapper-4"]}>김아무개</div>
+                  <div className={styles["text-wrapper-4"]}>{contentData.nickname}</div>
                 </div>
               </div>
-
               <div className={styles.view}>
                 <div className={styles["text-wrapper-3"]}>조회수 |</div>
                 <div className={styles["div-wrapper"]}>
-                  <div className={styles["text-wrapper-4"]}>10</div>
+                  <div className={styles["text-wrapper-4"]}>{contentData.viewCnt}</div>
                 </div>
               </div>
-
               <div className={styles.view}>
                 <div className={styles["text-wrapper-3"]}>작성일 |</div>
                 <div className={styles["div-wrapper"]}>
-                  <div className={styles["text-wrapper-4"]}>0000-00-00 00:00:00</div>
+                  <div className={styles["text-wrapper-4"]}>
+                    {contentData.createdAt === contentData.updatedAt ? contentData.updatedAt : contentData.updatedAt+" (수정됨)"}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <div className={styles["view-2"]}>
-            <img
-              className={styles.line}
-              alt="Line"
-              src="https://c.animaapp.com/xmCIijUi/img/line-2.svg"
-            />
-
+            <img className={styles.line} alt="Line" src={line1} />
             <div className={styles["view-3"]}>
               <p className={styles.p}>
-                아 진짜 강아지 너무 귀여워...
-                <br />
-                우리집 강아지 소개해줘도 됌?
-                <br />
-                <br />
-                우리 강아지 검은개랑 하얀개 있는데 정말 귀여움
-                <br />
-                <br />
-                검은개는 화정이고, 하얀개는 누리거든?
-                <br />
-                <br />
-                화정이는 푸들인데 뒷다리 약함 ㄷㄷ;
-                <br />
-                <br />
-                누리는 포메인데 ㅈㄴ 큼 ㅋㅋㅋㅋㅋㅋㅋ <br />
-                <br />
-                둘다 짭인게 확실함 ㅋㅋ
+                {contentData.content}
               </p>
             </div>
-
-            <img
-              className={styles.img}
-              alt="Line"
-              src="https://c.animaapp.com/xmCIijUi/img/line-2.svg"
-            />
+            <img className={styles.img} alt="Line" src={line2} />
           </div>
 
           <div className={styles["div-5"]}>
@@ -86,28 +86,14 @@ const Frame = () => {
                 <div className={styles["div-6"]}>
                   <div className={styles["text-wrapper-6"]}>강아지 사랑</div>
                   <div className={styles["text-wrapper-7"]}>대댓글</div>
-
-                  <img
-                    className={styles["line-2"]}
-                    alt="Line"
-                    src="https://c.animaapp.com/xmCIijUi/img/line-3-1.svg"
-                  />
-
+                  <img className={styles["line-2"]} alt="Line" src={line42} />
                   <div className={styles["text-wrapper-8"]}>수정</div>
-
-                  <img
-                    className={styles["line-2"]}
-                    alt="Line"
-                    src="https://c.animaapp.com/xmCIijUi/img/line-3-1.svg"
-                  />
-
+                  <img className={styles["line-2"]} alt="Line" src={image} />
                   <div className={styles["text-wrapper-8"]}>삭제</div>
                 </div>
-
                 <div className={styles["div-wrapper-3"]}>
                   <p className={styles["text-wrapper-9"]}>
-                    에이 그럴리가요 !?
-                    <br />
+                    에이 그럴리가요 !? <br />
                     말도 안되는 소리 하지마세요 ㅋㅋ
                   </p>
                 </div>
@@ -116,34 +102,18 @@ const Frame = () => {
               <div className={styles["frame-wrapper"]}>
                 <div className={styles["div-7"]}>
                   <div className={styles["div-8"]}>
-                    <img
-                      className={styles.vector}
-                      alt="Vector"
-                      src="https://c.animaapp.com/xmCIijUi/img/vector-1.svg"
-                    />
-
+                    <img className={styles.vector} alt="Vector" src={vector1} />
                     <div className={styles["div-9"]}>
-                      <div className={styles["text-wrapper-10"]}>강아지 팩폭러</div>
+                      <div className={styles["text-wrapper-10"]}>
+                        강아지 팩폭러
+                      </div>
                       <div className={styles["text-wrapper-7"]}>대댓글</div>
-
-                      <img
-                        className={styles["line-2"]}
-                        alt="Line"
-                        src="https://c.animaapp.com/xmCIijUi/img/line-3-1.svg"
-                      />
-
+                      <img className={styles["line-2"]} alt="Line" src={line4} />
                       <div className={styles["text-wrapper-8"]}>수정</div>
-
-                      <img
-                        className={styles["line-2"]}
-                        alt="Line"
-                        src="https://c.animaapp.com/xmCIijUi/img/line-3-1.svg"
-                      />
-
+                      <img className={styles["line-2"]} alt="Line" src={line3} />
                       <div className={styles["text-wrapper-8"]}>삭제</div>
                     </div>
                   </div>
-
                   <div className={styles["div-wrapper-4"]}>
                     <p className={styles["text-wrapper-9"]}>
                       그런 개들 있음 ㅋㅋ <br />
@@ -155,14 +125,24 @@ const Frame = () => {
             </div>
           </div>
 
-          <ReviewInput />
+          <div className={styles["overlap-group-wrapper"]}>
+            <div className={styles["overlap-group"]}>
+              <div className={styles["div-wrapper-5"]}>
+                <p className={styles["text-wrapper-11"]}>
+                  댓글은 로그인이 필요한 서비스 입니다.
+                </p>
+              </div>
+              <div className={styles["div-wrapper-6"]}>
+                <div className={styles["text-wrapper-12"]}>댓글쓰기</div>
+              </div>
+            </div>
+          </div>
 
           <div className={styles["div-10"]}>
-            <div className={styles["div-wrapper-5"]}>
+            <div className={styles["div-wrapper-7"]}>
               <div className={styles["text-wrapper-3"]}>목록으로</div>
             </div>
-
-            <div className={styles["div-wrapper-6"]}>
+            <div className={styles["div-wrapper-8"]}>
               <div className={styles["text-wrapper-3"]}>글쓰기</div>
             </div>
           </div>
@@ -171,5 +151,4 @@ const Frame = () => {
     </div>
   );
 };
-
-export default Frame;
+export default PostReadComponents;
