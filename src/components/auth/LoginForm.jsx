@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/auth/authActions"; // Redux 액션 가져오기
-import { useNavigate } from "react-router-dom"; // 로그인 후 이동하기 위해 필요
+import { useLocation, useNavigate } from "react-router-dom"; // 로그인 후 이동하기 위해 필요
 import "./auth.css"; // 로그인 스타일 적용
 import authTopImg from "./auth_top_img.png";
 
@@ -11,6 +11,10 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
+  // 이전 페이지로 돌아가기위해
+  const location = useLocation();
+  const from = location.state?.from ;
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
@@ -18,7 +22,11 @@ const LoginForm = () => {
 
     try {
       await dispatch(login(email, password)); // Redux 로그인 액션 실행
-      navigate("/"); // 로그인 성공 후 홈으로 이동
+      if (from) {
+        navigate(from.pathname + from.search + from.hash , { replace : true }); // 로그인 성공 후 홈으로 이동
+      } else {
+        navigate('/', { replace : true })
+      }
     } catch (err) {
       setError(err.response?.data?.message || "로그인 실패"); // 백엔드 에러 메시지 표시
     }

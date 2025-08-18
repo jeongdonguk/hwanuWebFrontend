@@ -1,5 +1,5 @@
 import { React, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import classes from "./Header.module.css";
 import hwanu_img from "./hwanu.png";
 import hwanu_text from "./hwanuMainText.png";
@@ -10,12 +10,19 @@ import { logout } from "../../store/auth/authActions";
 import { logoutSuccess } from "../../store/auth/authSlice";
 
 const HeaderTop = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const userEmail = useSelector((state) => state.auth.email);
 
   const dispatch = useDispatch();
 
+  // 로그인 핸들러
+  const loginHandle = () => {
+    navigate('/login', { state: { from: location } });
+  }
+
+  // 로그아웃 핸들러
   const logoutHandle = async () => {
     console.log(userEmail)
     if (!userEmail) {
@@ -33,10 +40,10 @@ const HeaderTop = () => {
 
 
 
-  useEffect(() => {
-    console.log("현재 Redux 상태:", isLogin);
-    console.log(userEmail);
-  }, [isLogin, userEmail]); // 상태가 변경될 때마다 출력
+  // useEffect(() => {
+  //   console.log("현재 Redux 상태:", isLogin);
+  //   console.log(userEmail);
+  // }, [isLogin, userEmail]); // 상태가 변경될 때마다 출력
   
   // useEffect(() => {
   //   if (!isLogin) {
@@ -68,7 +75,7 @@ const HeaderTop = () => {
           ) : (
             <div
               className={classes.login_text}
-              onClick={() => navigate("/login")}
+              onClick={loginHandle}
             >
               로그인 | 회원가입
             </div>
