@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>  {/* Redux Provider로 감싸기 */}
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </BrowserRouter>
       </QueryClientProvider>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
