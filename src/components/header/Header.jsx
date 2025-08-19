@@ -14,6 +14,7 @@ const HeaderTop = () => {
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const userEmail = useSelector((state) => state.auth.email);
+  const userNickname = useSelector((state) => state.auth.nickname || state.auth.email);
 
   const dispatch = useDispatch();
 
@@ -69,8 +70,8 @@ const HeaderTop = () => {
           </div>
           {isLogin ? (
             <div onClick={logoutHandle} className={classes.login_text} >
-              {userEmail} 
-              로그아웃
+              {userNickname} 
+              &nbsp;&nbsp;로그아웃
             </div>
           ) : (
             <div
