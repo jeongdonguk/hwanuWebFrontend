@@ -98,3 +98,16 @@ opacity: 1; */
 .board_table th:nth-child(4) {width: 10%;}
 .board_table th:nth-child(5) {width: 10%;}
 .board_table th:nth-child(6) {width: 10%;}
+
+
+/* .title_cursor {
+    cursor: pointer;
+    color: blue; 
+    text-decoration: underline;
+} */
+
+.title_cursor:hover {
+    cursor: pointer;
+    /* color: blue;  */
+    text-decoration: underline;
+}

@@ -2,11 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { fetchBoardList } from "../../api/board";
 import classes from "./BoardList.module.css";
+import { useNavigate } from "react-router-dom";
 
 function BoardList({page, setTotalPage}) {
 
   const [boards, setBoards] = useState([]);
   const [boardsCnt, setBoardsCnt] = useState(0);
+  const navigate = useNavigate();
 
   // 게시글 가져올때 사용할 api 결정
   const fetchBoards = async () => {
@@ -46,7 +48,7 @@ function BoardList({page, setTotalPage}) {
     {boards.map(board => (
       <tr key={board.boardId}>
         <td>{board.boardId}</td>
-        <td>{board.title}</td>
+        <td onClick={() => navigate(`/postRead?boardId=${board.boardId}`)} className={classes.title_cursor}>{board.title}</td>
         <td>{board.nickname}</td>
         <td>{board.likeCnt}</td>
         <td>{board.likeCnt}</td>
