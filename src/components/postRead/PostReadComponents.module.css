@@ -143,9 +143,11 @@
   width: 810px;
 }
 .frame .view-3 {
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start;
   display: flex;
   flex: 0 0 auto;
+  min-height: 350px;
   gap: 10px;
   justify-content: center;
   padding: 18px 0px;
