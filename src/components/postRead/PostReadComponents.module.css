@@ -166,6 +166,12 @@
   position: relative;
   width: 788px;
 }
+.frame .p img {
+  max-width: 100%;   /* 부모 영역 넘지 않게 */
+  height: auto;      /* 비율 유지 */
+  display: block;    /* inline 요소라면 block으로 정렬 */
+  margin: 8px 0;     /* 위아래 간격 조금 추가 */
+}
 .frame .img {
   height: 1px;
   left: 0;

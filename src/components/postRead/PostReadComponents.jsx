@@ -10,6 +10,7 @@ import vector1 from "./img/recomment.svg";
 import { useSearchParams } from "react-router-dom";
 import { getPostData, getCommentData } from "../../api/postApi";
 import { useSelector } from "react-redux";
+import DOMPurify from "dompurify"
 
 export const PostReadComponents = () => {
   // 게시글 번호 추출용
@@ -135,7 +136,8 @@ function Content({ contentData }) {
       <div className={styles["view-2"]}>
         <img className={styles.line} alt="Line" src={line1} />
         <div className={styles["view-3"]}>
-          <p className={styles.p}>{contentData.content}</p>
+          <div className={styles.p}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentData.content) }}/>
         </div>
         <img className={styles.img} alt="Line" src={line2} />
       </div>
