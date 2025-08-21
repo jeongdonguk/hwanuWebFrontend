@@ -3,9 +3,12 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import Editor from "@toast-ui/editor";
 import classes from "./PostToast.module.css"
 import {replaceBase64Images} from './ImageUpload'
+import { postWrite } from "../../api/postApi";
+import { useNavigate } from "react-router-dom";
 
 export default function PostToast() {
   const editorRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const instance = new Editor({
@@ -31,14 +34,14 @@ export default function PostToast() {
   const handleSave = async () => {
     const editorInstance = editorRef.current.editorInstance;
     const markdown = editorInstance.getHTML();
-    console.log("markdown : ",markdown)
+    // console.log("markdown : ",markdown)
     const contentHtml = await replaceBase64Images(markdown);
     const title = document.getElementById("title-input").value;
+    console.log("contentHtml : ",contentHtml)
 
-
-    console.log("제목:", title);
-    console.log("내용:", contentHtml);
-
+    const result = await postWrite(title, contentHtml)
+    
+    navigate(`/postRead?boardId=${result.boardId}`)
     // 여기에 API로 POST 요청 등 작성 가능
   };
 
