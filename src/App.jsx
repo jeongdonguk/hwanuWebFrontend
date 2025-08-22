@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     const tokenCheck = async () => {
       const result = await dispatch(checkAuth()); // 앱이 실행될 때 로그인 상태 체크
-      console.log("로그인 상태 점검 : ", result);
+      // console.log("로그인 상태 점검 : ", result);
       if (!result && location.pathname in redirectMap) {
         alert("로그인이 필요한 페이지 입니다.");
         navigate(redirectMap[location.pathname], { state : {from : location}});      
