@@ -29,7 +29,7 @@ function BoardPaging({page, setPage, totalPage}) {
 
           {/* 페이징 번호 */}
           {pageNumbers.map((pageNum) => (
-            <div className={`${classes.click_page_button} ${classes.click_page_button_num_wide}`} onClick={() => pageChangeHandler(pageNum)}>[{pageNum + 1}]</div>
+            <div key={pageNum} className={`${classes.click_page_button} ${classes.click_page_button_num_wide}`} onClick={() => pageChangeHandler(pageNum)}>[{pageNum + 1}]</div>
           ))}
 
           {/* << - 다음 페이지로 가는 버튼 */}
