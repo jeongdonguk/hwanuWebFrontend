@@ -7,8 +7,8 @@ import line42 from "./img/vertical_bar.svg";
 import line4 from "./img/vertical_bar.svg";
 import styles from "./PostReadComponents.module.css";
 import vector1 from "./img/recomment.svg";
-import { useSearchParams } from "react-router-dom";
-import { getPostData, getCommentData } from "../../api/postApi";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { getPostData, getCommentData, commentWrite } from "../../api/postApi";
 import { useSelector } from "react-redux";
 import DOMPurify from "dompurify"
 
@@ -49,6 +49,7 @@ export const PostReadComponents = () => {
     }
   }, []);
 
+
   if (!contentData || !commentData) {
     return null;
   }
@@ -81,7 +82,7 @@ export const PostReadComponents = () => {
             </div>
           </div>
 
-          <NewComment {...{hasJwt, commentText, setCommentText}}></NewComment>
+          <NewComment {...{hasJwt, commentText, setCommentText, boardId, fetchCommentData}}></NewComment>
 
           <div className={styles["div-10"]}>
             <div className={styles["div-wrapper-7"]}>
@@ -196,7 +197,21 @@ function ReComment({ recomments }) {
   );
 }
 
-function NewComment({ hasJwt, commentText, setCommentText}) {
+function NewComment({ hasJwt, commentText, setCommentText, boardId, fetchCommentData}) {
+
+  const { email, memberId, nickname } = useSelector(state => state.auth);
+  const navigate = useNavigate();
+
+  const CommentWriteHandler = async() => {
+    if (!hasJwt) {
+      alert("댓글 작성은 로그인이 필요한 서비스입니다.")
+      // navigate("/login");
+    }
+    await commentWrite(boardId, commentText, email, memberId, nickname);
+    await fetchCommentData();
+    setCommentText("");
+  }
+
   return (
     <div className={styles["overlap-group-wrapper"]}>
       <div className={styles["overlap-group"]}>
@@ -214,7 +229,7 @@ function NewComment({ hasJwt, commentText, setCommentText}) {
             </p>
           )}
         </div>
-        <div className={styles["div-wrapper-6"]}>
+        <div onClick={CommentWriteHandler} className={styles["div-wrapper-6"]}>
           <div className={styles["text-wrapper-12"]}>댓글쓰기</div>
         </div>
       </div>
