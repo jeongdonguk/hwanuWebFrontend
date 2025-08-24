@@ -158,7 +158,12 @@ function Comment({ comment }) {
         <div className={styles["text-wrapper-8"]}>삭제</div>
       </div>
       <div className={styles["div-wrapper-3"]}>
-        <p className={styles["text-wrapper-9"]}>{comment.content}</p>
+        <p
+          className={styles.p}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(comment.content),
+          }}
+        />
       </div>
     </div>
   );
